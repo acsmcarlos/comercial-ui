@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OportunidadeService } from '../oportunidade.service';
 
 @Component({
   selector: 'app-painel-negociacao',
@@ -7,15 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PainelNegociacaoComponent implements OnInit {
 
-  oportunidades = [
-    {descricao: 'Projeto 06', nomeProspecto: 'Francisco', valor: 1000},
-    {descricao: 'Projeto 07', nomeProspecto: 'Raimundo', valor: 2000},
+  oportunidades = [];
 
-  ];
-
-  constructor() { }
+  constructor(private oportunidadeService: OportunidadeService) { }
 
   ngOnInit(): void {
+    this.oportunidadeService.listar()
+      .subscribe(resposta => this.oportunidades = <any> resposta)
   }
 
 }
